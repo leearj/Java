@@ -1,0 +1,21 @@
+body {
+  padding-top: 20px;
+}
+
+.container {
+  color: #333333;
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  text-align: center;
+  background-color: transparent;
+}
+
+.footer {
+  padding-bottom: 40px;
+  margin-top: 40px;
+  border-top: 1px solid #eee;
+}
+
+.start {
+  text-align: center;
+  background-color: transparent;
+}

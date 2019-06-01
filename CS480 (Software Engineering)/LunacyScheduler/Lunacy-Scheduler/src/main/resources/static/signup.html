@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SignUp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>SignUp Template for Bootstrap</title>
+    
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+   		<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+
+		<!-- local files -->
+        <script src="js/Sign.js"></script>
+		
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+  </head>
+
+  <body ng-controller='SignUp'>
+
+    <div class="container">
+      <form class="form-signin" name="form">
+        <h2 class="form-signin-heading">Please sign up</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" ng-model="signup.email" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" ng_model="first.password" class="form-control" placeholder="Password" required>
+        <label for="inputPassword" class="sr-only">Confirm Password</label>
+        <input type="password" id="inputPassword" ng_model="confirm.password" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember Me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="form.$invalid" ng-click="signup()">Sign Up</button>
+      </form>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="LunacyScheduler">
+    <head>
+        <title>Date Picker (Version 3)</title>
+        
+	<!-- Include Required Prerequisites -->
+	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+	
+	 
+	<!-- Include Date Range Picker -->
+	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+	
+	<!-- Local CSS files -->
+	<link href="/css/datePickerV3.css" rel="stylesheet">
+    <script src="/js/home.js"></script>
+    
+    </head>
+    
+    <body ng-controller="Schedule">
+    
+    <div class="jumbotron text-center">
+			<h1><strong>Enter your unavailable hours<strong></h1>
+	</div>
+	
+	<div class="container"><h2>Enter Date Range:</h2></div>
+		<div class="col-lg-4 col-lg-offset-4">
+	        <div class="input-group">
+			               <input type="text" name="daterange" class="form-control" ng-model="start">
+			               <span class="input-group-addon">
+			                		<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+			</div>
+		</div>
+        
+        <script>
+        $('input[name="daterange"]').daterangepicker(
+        		{
+        		    locale: {
+        		      format: 'MM-DD-YYYY'
+        		    },
+        		    alwaysShowCalendars: true,
+        		    todayBtn: "linked",
+        		    autoclose: true,
+        		    todayHighlight: true
+        		}, 
+        		function(start, end, label) {
+        		    //When you click Apply Button
+        			var myDate = new Date(start);
+        			var dayWrapper = moment(myDate); 
+        			//var dayString = dayWrapper.format("dddd MMMM DD YYYY"); 
+        			var dayString = dayWrapper.format("MM-DD-YYYY"); 
+        			alert(dayString);
+        		    
+        		});
+        
+        </script>
+        <form style= "text-align: center;">
+			</br>
+			</br>
+			<button style= "margin: 0 auto;" class = "btn btn-success" ng-click="addDate()">Submit</button>
+		</form>
+
+	   <tt>value = {{start}}</tt><br/>
+    </body>
+</html>

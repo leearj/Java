@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="LunacyScheduler">
+   <head>
+      <meta charset="utf-8">
+      <title>Event Descriptions</title>
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="/images/logo.png">
+
+      <!--  CDN js files -->
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+      <!--  Firebase dependencies -->
+      <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+      <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+      <!-- local files -->
+      <script src="/js/bootstrap.min.js"></script>
+      <script src="/js/angular-bootstrap.js"></script>
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/sticky-footer.css" rel="stylesheet">
+      <script src="js/moment.js"></script>
+
+      <!--  local custom files -->
+      <link href="css/event_description.css" rel="stylesheet">
+      <script src="js/event_description.js"></script>
+
+   </head>
+   <body ng-controller="eventDescription">
+
+     <nav class="navbar navbar-default">
+       <div class="container-fluid">
+         <div class="navbar-header">
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand" href="/">Lunacy Scheduler</a>
+         </div>
+
+         <div id="navbar" class="navbar-collapse collapse">
+           <ul class="nav navbar-nav">
+             <li><a href="/">Home</a></li>
+             <li><a href="/about.html">About</a></li>
+             <li><a href="/faq.html">FAQ</a></li>
+           </ul>
+
+           <ul class="nav navbar-nav navbar-right">
+             <li><a href="/login.html">Login</a></li>
+           </ul>
+         </div>
+           <!--/.nav-collapse -->
+        </div>
+        <!--/.container-fluid -->
+     </nav>
+
+     <div class="container">
+       <!-- Back Button -->
+       <div id="backButton"> <input type="image" width="38" height="38" src="/images/backButton.png" onclick="window.history.back()" /></div>
+        <!-- Title -->
+       <div id='title'>Event Information</div>
+     </div>
+
+     <div class="container">
+       <!-- First Row -->
+       <div class="row">
+         <!-- First Column -->
+         <div class="col-md-6">
+           <div class="panel panel-info">
+             <div class="panel-heading">Title</div>
+             <div class="panel-footer">{{title}}</div>
+           </div>
+         </div><!-- End of First Column -->
+         <!-- Second Column -->
+         <div class="col-md-6">
+           <div class="panel panel-info">
+             <div class="panel-heading">Description</div>
+             <div class="panel-footer">{{description}}</div>
+           </div>
+         </div><!-- End of Second Column -->
+       </div><!-- End of First Row -->
+
+      <!-- Second Row -->
+      <div class="row">
+        <!-- First Column -->
+        <div class="col-md-6">
+          <div class="panel panel-info">
+            <div class="panel-heading">Start Time</div>
+            <div class="panel-footer">{{start}}</div>
+          </div>
+        </div><!-- End First Column -->
+        <!-- Second of Column -->
+        <div class="col-md-6">
+          <div class="panel panel-info">
+            <div class="panel-heading">End Time</div>
+            <div class="panel-footer"> {{end}}</div>
+          </div>
+        </div><!-- End of Second Column -->
+      </div><!-- End of Second Row -->
+
+    </div><!-- End of container -->
+
+    <!-- Users Table -->
+    <div class="container">
+      <!-- Table Row -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Users</h3>
+              <div class="pull-right">
+                <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body"><i class="glyphicon glyphicon-filter"></i></span>
+              </div>
+           </div>
+
+           <div class="panel-body">
+             <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Users" />
+           </div>
+
+           <table class="table table-hover" id="dev-table">
+             <thead>
+               <tr>
+                 <th>#</th>
+                 <th>First Name</th>
+                 <th>Last Name</th>
+                 <th>Email</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr ng-repeat="each in users">
+                 <td>{{$index + 1}}</td>
+                 <td>{{ each.first }}</td>
+                 <td>{{ each.last }}</td>
+                 <td>{{ each.email }}</td>
+               </tr>
+             </tbody>
+           </table>
+
+         </div><!-- panel panel-primary -->
+       </div><!-- col-md-10 col-md-offset-1 -->
+     </div><!-- End of table row -->
+   </div><!-- End of Users Table -->
+
+   </body>
+
+   <!-- FOOTER -->
+   <footer>
+      <div class="footer">
+         <div class="container">
+            <div class="powered-by-copyright col-md-9">
+               <p style="clear:both;">&copy; 2017 LUNACY SCHEDULER <img src="images/logo.png" style="width:50px;height:50px;" /> ALL RIGHTS RESERVED.</p>
+            </div>
+         </div>
+      </div>
+
+   </footer>
+</html>

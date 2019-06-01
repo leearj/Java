@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+ <html ng-app="LunacyScheduler">
+     <head>
+         <title>Lunacy Scheduler</title>
+
+         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+ 	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+ 	    <script src="https://code.angularjs.org/1.5.6/angular-animate.min.js"></script>
+ 	    <script src="https://code.angularjs.org/1.5.6/angular-touch.min.js"></script>
+    		<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-app.js"></script>
+ 		<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-auth.js"></script>
+ 		<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-database.js"></script>
+ 		<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+ 		<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+
+
+ 		<!-- local files -->
+ 		<script src="/js/bootstrap.js"></script>
+ 		<script src="/js/bootstrap.min.js"></script>
+         <script src="/js/test.js"></script>
+         <script src="/js/angular-bootstrap.js"></script>
+         <link href="css/bootstrap.min.css" rel="stylesheet">
+ 		<link rel="icon" href="images/logo.png">
+ 		<link href="css/sticky-footer.css" rel="stylesheet">
+ 		<script src="js/moment.js"></script>
+
+     </head>
+ <body ng-controller="DatepickerPopupDemoCtrl">
+  <nav class="navbar navbar-default">
+         <div class="container-fluid">
+           <div class="navbar-header">
+             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+             </button>
+             <a class="navbar-brand" href="#">Lunacy Scheduler</a>
+           </div>
+           <div id="navbar" class="navbar-collapse collapse">
+             <ul class="nav navbar-nav">
+               <li class="active"><a href="index.html">Home</a></li>
+               <li><a href="about.html">About</a></li>
+               <li><a href="#">FAQ</a></li>
+             </ul>
+ 			<ul class="nav navbar-nav navbar-right">
+               <li><a href="login.html">Login</a></li>
+             </ul>
+           </div><!--/.nav-collapse -->
+         </div><!--/.container-fluid -->
+       </nav>
+  	<div class="container">
+
+  				<div class="jumbotron text-center">
+  				<h1><strong>Enter your unavailable hours</strong></h1>
+  				</div>
+  				<form name="form" >
+  				<div class="input-group">
+ 		        	        <span class="input-group-addon">
+ 		                		<span class="glyphicon glyphicon-user"></span>
+ 					</span>
+ 		                <input type="text" class="form-control" placeholder="FirstName" ng-model="first.name" required>
+ 		        </div>
+ 				<div class="input-group">
+ 		        	        <span class="input-group-addon">
+ 		                		<span class="glyphicon glyphicon-user"></span>
+ 						</span>
+ 		                <input type="text" class="form-control" placeholder="LastName" ng-model="last.name" required>
+ 		        </div>
+					<div class="input-group">
+ 		        	        <span class="input-group-addon">
+ 		                		<span class="glyphicon glyphicon-blackboard"></span>
+ 						</span>
+						<input type="text" class="form-control" placeholder="Email" ng-model="emailname" required>
+					</div>
+
+ 			    <div class="row">
+ 		      <div class="col-md-6">
+ 		        <p class="input-group">
+ 		          <input type="text" class="form-control" uib-datepicker-popup='dd-MMMM-yyyy' ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" required>
+ 		          <span class="input-group-btn">
+ 		            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+ 		          </span>
+ 		        </p>
+ 		      </div>
+
+ 		      <div class="col-md-6">
+ 		        <p class="input-group">
+ 		          <input type="text" class="form-control" uib-datepicker-popup='dd-MMMM-yyyy' ng-model="dt.end" is-open="popup2.opened" datepicker-options="dateOptions1" ng-required="true" close-text="Close" required/>
+ 		          <span class="input-group-btn">
+ 		            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+ 		          </span>
+  		        </p>
+  		      </div>
+  		    </div>
+  		  </div>
+
+  		<div class="container-fluid">
+        <uib-tabset active="active">
+          <uib-tab index="0" heading="Sunday">
+           <div style="padding-bottom:50px">
+       			<table style="width:100%">
+       				<tr>
+       					<td style="width:45%;padding-left:40px;vertical-align: top">
+       						<div style="padding-bottom:20px">
+       							<h3>Add Available Schedule</h3>
+       						</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">Start Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="sunStart.date" ng-change="startSunday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="name" ng-model="monStart" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">End Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="sunEnd.date" ng-change="endSunday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="employees"ng-model="monEnd" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<div style="padding-left:110px">
+       									<button type="button" class="btn btn-success" ng-click="sunSubmit()">Submit</button>
+       								</div>
+       							</div>
+       					</td>
+       					<td style="vertical-align: top">
+       						<table class="table">
+       							<tr>
+       								<th>Start Time</th>
+       								<th>End Time</th>
+       							</tr>
+       							<tr ng-repeat="sunAvail in sunAvails track by sunAvail.start">
+       								<td>{{sunAvail.start | date:'shortTime' }}</td>
+       								<td>{{sunAvail.end | date:'shortTime' }}</td>
+                       <td><button type="button" class="btn btn-sm btn-danger" ng-click="removeSun(sunAvail.start)">Remove</button></td>
+       							</tr>
+       						</table>
+       					</td>
+       				</tr>
+       			</table>
+ 		       </div>
+         </uib-tab>
+         <uib-tab index="1" heading="Monday">
+           <div style="padding-bottom:50px">
+       			<table style="width:100%">
+       				<tr>
+       					<td style="width:45%;padding-left:40px;vertical-align: top">
+       						<div style="padding-bottom:20px">
+       							<h3>Add Available Schedule</h3>
+       						</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">Start Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="monStart.date" ng-change="startMonday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="name" ng-model="monStart" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">End Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="monEnd.date" ng-change="endMonday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="employees"ng-model="monEnd" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<div style="padding-left:110px">
+       									<button type="button" class="btn btn-success" ng-click="monSubmit()">Submit</button>
+       								</div>
+       							</div>
+       					</td>
+       					<td style="vertical-align: top">
+       						<table class="table">
+       							<tr>
+       								<th>Start Time</th>
+       								<th>End Time</th>
+       							</tr>
+       							<tr ng-repeat="monAvail in monAvails track by monAvail.start">
+       								<td>{{monAvail.start | date:'shortTime' }}</td>
+       								<td>{{monAvail.end | date:'shortTime' }}</td>
+                       <td><button type="button" class="btn btn-sm btn-danger" ng-click="removeMon(monAvail.start)">Remove</button></td>
+       							</tr>
+       						</table>
+       					</td>
+       				</tr>
+       			</table>
+ 		       </div>
+         </uib-tab>
+         <uib-tab index="2" heading="Tuesday">
+           <div style="padding-bottom:50px">
+       			<table style="width:100%">
+       				<tr>
+       					<td style="width:45%;padding-left:40px;vertical-align: top">
+       						<div style="padding-bottom:20px">
+       							<h3>Add Available Schedule</h3>
+       						</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">Start Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="tuesStart.date" ng-change="startTuesday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="name" ng-model="monStart" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">End Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="tuesEnd.date" ng-change="endTuesday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="employees"ng-model="monEnd" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<div style="padding-left:110px">
+       									<button type="button" class="btn btn-success" ng-click="tuesSubmit()">Submit</button>
+       								</div>
+       							</div>
+       					</td>
+       					<td style="vertical-align: top">
+       						<table class="table">
+       							<tr>
+       								<th>Start Time</th>
+       								<th>End Time</th>
+       							</tr>
+       							<tr ng-repeat="tuesAvail in tuesAvails track by tuesAvail.start">
+       								<td>{{tuesAvail.start | date:'shortTime' }}</td>
+       								<td>{{tuesAvail.end | date:'shortTime' }}</td>
+                       <td><button type="button" class="btn btn-sm btn-danger" ng-click="removeTues(tuesAvail.start)">Remove</button></td>
+       							</tr>
+       						</table>
+       					</td>
+       				</tr>
+       			</table>
+ 		       </div>
+         </uib-tab>
+         <uib-tab index="3" heading="Wednesday">
+           <div style="padding-bottom:50px">
+       			<table style="width:100%">
+       				<tr>
+       					<td style="width:45%;padding-left:40px;vertical-align: top">
+       						<div style="padding-bottom:20px">
+       							<h3>Add Available Schedule</h3>
+       						</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">Start Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="wedStart.date" ng-change="startWednesday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="name" ng-model="monStart" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">End Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="wedEnd.date" ng-change="endWednesday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="employees"ng-model="monEnd" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<div style="padding-left:110px">
+       									<button type="button" class="btn btn-success" ng-click="wedSubmit()">Submit</button>
+       								</div>
+       							</div>
+       					</td>
+       					<td style="vertical-align: top">
+       						<table class="table">
+       							<tr>
+       								<th>Start Time</th>
+       								<th>End Time</th>
+       							</tr>
+       							<tr ng-repeat="wedAvail in wedAvails track by wedAvail.start">
+       								<td>{{wedAvail.start | date:'shortTime' }}</td>
+       								<td>{{wedAvail.end | date:'shortTime' }}</td>
+                       <td><button type="button" class="btn btn-sm btn-danger" ng-click="removeWed(wedAvail.start)">Remove</button></td>
+       							</tr>
+       						</table>
+       					</td>
+       				</tr>
+       			</table>
+ 		       </div>
+         </uib-tab>
+         <uib-tab index="4" heading="Thursday">
+           <div style="padding-bottom:50px">
+       			<table style="width:100%">
+       				<tr>
+       					<td style="width:45%;padding-left:40px;vertical-align: top">
+       						<div style="padding-bottom:20px">
+       							<h3>Add Available Schedule</h3>
+       						</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">Start Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="thursStart.date" ng-change="startThursday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="name" ng-model="monStart" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">End Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="thursEnd.date" ng-change="endThursday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="employees"ng-model="monEnd" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<div style="padding-left:110px">
+       									<button type="button" class="btn btn-success" ng-click="thursSubmit()">Submit</button>
+       								</div>
+       							</div>
+       					</td>
+       					<td style="vertical-align: top">
+       						<table class="table">
+       							<tr>
+       								<th>Start Time</th>
+       								<th>End Time</th>
+       							</tr>
+       							<tr ng-repeat="thursAvail in thursAvails track by thursAvail.start">
+       								<td>{{thursAvail.start | date:'shortTime' }}</td>
+       								<td>{{thursAvail.end | date:'shortTime' }}</td>
+                       <td><button type="button" class="btn btn-sm btn-danger" ng-click="removeThurs(thursAvail.start)">Remove</button></td>
+       							</tr>
+       						</table>
+       					</td>
+       				</tr>
+       			</table>
+ 		       </div>
+         </uib-tab>
+         <uib-tab index="5" heading="Friday">
+           <div style="padding-bottom:50px">
+       			<table style="width:100%">
+       				<tr>
+       					<td style="width:45%;padding-left:40px;vertical-align: top">
+       						<div style="padding-bottom:20px">
+       							<h3>Add Available Schedule</h3>
+       						</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">Start Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="friStart.date" ng-change="startFriday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="name" ng-model="monStart" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">End Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="friEnd.date" ng-change="endFriday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="employees"ng-model="monEnd" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<div style="padding-left:110px">
+       									<button type="button" class="btn btn-success" ng-click="friSubmit()">Submit</button>
+       								</div>
+       							</div>
+       					</td>
+       					<td style="vertical-align: top">
+       						<table class="table">
+       							<tr>
+       								<th>Start Time</th>
+       								<th>End Time</th>
+       							</tr>
+       							<tr ng-repeat="friAvail in friAvails track by friAvail.start">
+       								<td>{{friAvail.start | date:'shortTime' }}</td>
+       								<td>{{friAvail.end | date:'shortTime' }}</td>
+                       <td><button type="button" class="btn btn-sm btn-danger" ng-click="removeFri(friAvail.start)">Remove</button></td>
+       							</tr>
+       						</table>
+       					</td>
+       				</tr>
+       			</table>
+ 		       </div>
+         </uib-tab>
+         <uib-tab index="6" heading="Saturday">
+           <div style="padding-bottom:50px">
+       			<table style="width:100%">
+       				<tr>
+       					<td style="width:45%;padding-left:40px;vertical-align: top">
+       						<div style="padding-bottom:20px">
+       							<h3>Add Available Schedule</h3>
+       						</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">Start Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="satStart.date" ng-change="startSaturday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="name" ng-model="monStart" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<label class="col-md-2 control-label">End Time</label>
+       								<div class="col-md-4">
+                         <div uib-timepicker ng-model="satEnd.date" ng-change="endSaturday()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+       									<!-- <input type="text" class="form-control" name="employees"ng-model="monEnd" /> -->
+       								</div>
+       							</div>
+       							<div class="form-group">
+       								<div style="padding-left:110px">
+       									<button type="button" class="btn btn-success" ng-click="satSubmit()">Submit</button>
+       								</div>
+       							</div>
+       					</td>
+       					<td style="vertical-align: top">
+       						<table class="table">
+       							<tr>
+       								<th>Start Time</th>
+       								<th>End Time</th>
+       							</tr>
+       							<tr ng-repeat="satAvail in satAvails track by satAvail.start">
+       								<td>{{satAvail.start | date:'shortTime' }}</td>
+       								<td>{{satAvail.end | date:'shortTime' }}</td>
+                       <td><button type="button" class="btn btn-sm btn-danger" ng-click="removeSat(satAvail.start)">Remove</button></td>
+       							</tr>
+       						</table>
+       					</td>
+       				</tr>
+       			</table>
+ 		       </div>
+         </uib-tab>
+       </uib-tabset>
+
+ 		</div>
+
+  		<div class="container" align="center">
+  		    <hr />
+  		    <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
+  		    <button type="button" class="btn btn-success" ng-disabled="form.$invalid" ng-click="submit()">Submit</button>
+  		</div>
+  		</form>
+
+      </body>
+
+
+ </div>
+      <!-- FOOTER -->
+
+  		<footer>
+        <div class="footer">
+         		<div class="container">
+         			<div class="powered-by-copyright col-md-9">
+
+             			<p style="clear:both;">&copy; 2017 LUNACY SCHEDULER <img src="images/logo.png" style="width:50px;height:50px;" /> ALL RIGHTS RESERVED.</p>
+           			</div>
+         		</div>
+       		</div>
+     	</footer>
+ </html>
