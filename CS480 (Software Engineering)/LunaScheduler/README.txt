@@ -5,4 +5,4 @@
 	https://github.com/cppBTS
 
 -Project Description:
-	The convenient online hangout scheduler for each users using AWS, along with CSS, Bootstrap, JavaScript, React.js. 
+	The convenient online hangout scheduler for each users using AWS, along with CSS, Bootstrap, JavaScript, React.js and etc. 
