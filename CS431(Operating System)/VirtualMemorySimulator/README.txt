@@ -2,6 +2,8 @@
 
 # VirtualMemorySimulator
 
+* This was a group project of members of three.
+
 	How to compile and run Assignment 1 from command line:
 	
 		1) Extract source code from compressed file.
