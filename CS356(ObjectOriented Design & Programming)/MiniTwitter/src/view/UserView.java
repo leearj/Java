@@ -1,5 +1,9 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+
 import javax.swing.AbstractListModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -9,18 +13,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.LayoutStyle;
+import javax.swing.ListModel;
+
 import data.User;
 
 public class UserView {
 	
-	private User newUser;
+	private User user;
 	private JFrame frame2;	// UserView
 	private JTree tree; // Both use same JTree tree
 	private GroupLayout layout2;
 	
 	// frame2 Variables declaration                    
     private JButton button_followuser;
-    private JButton button_postweet;
+    private JButton button_postTweet;
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
     private JScrollPane jScrollPane3;
@@ -31,14 +37,17 @@ public class UserView {
     private JTextArea textarea_userid;
     
     UserView(User newUser){	// Gets User from the node we find in GUI.
-    	this.newUser = newUser;
+    	this.user = newUser;
     	frame2 = new JFrame("UserView");
     	frame2.setExtendedState(JFrame.MAXIMIZED_BOTH);
     	frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	layout2 = new GroupLayout(frame2.getContentPane());
     	frame2.getContentPane().setLayout(layout2);
     	
+    	showCreationTime();	//A3
     	initComponents();
+		initPostTweet();	//A3
+    	initFollowUser();	//A3
     }
 
 	private void initComponents() {
@@ -51,7 +60,7 @@ public class UserView {
     	list_currentfollowing = new JList<>();
     	jScrollPane3 = new JScrollPane();
     	textarea_textmessage = new JTextArea();
-    	button_postweet = new JButton();
+    	button_postTweet = new JButton();
     	jScrollPane4 = new JScrollPane();
     	list_newsfeed = new JList<>();
     	
@@ -74,10 +83,10 @@ public class UserView {
         textarea_textmessage.setText("This is tweet message\n");
         jScrollPane3.setViewportView(textarea_textmessage);
 
-        button_postweet.setText("Post Tweet");
-        button_postweet.addActionListener(new java.awt.event.ActionListener() {
+        button_postTweet = new JButton("Post Tweet");
+        button_postTweet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_postweetActionPerformed(evt);
+                postTweetActionPerformed(evt);
             }
         });
 
@@ -104,7 +113,7 @@ public class UserView {
                             .addGroup(GroupLayout.Alignment.TRAILING, layout2.createSequentialGroup()
                                 .addComponent(jScrollPane3)
                                 .addGap(18, 18, 18)
-                                .addComponent(button_postweet, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(button_postTweet, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 530, GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
@@ -120,13 +129,45 @@ public class UserView {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout2.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3)
-                    .addComponent(button_postweet, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(button_postTweet, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 	}
-	 private void button_postweetActionPerformed(java.awt.event.ActionEvent evt) {                                                
-	        // TODO add your handling code here:
-	 }
+	
+	// A3
+	
+	private void showCreationTime() {
+		Date date = new Date(user.showCreationTime());
+		System.out.println("Creation time: " + date);
+	}
+	
+	private void initPostTweet() {
+		button_postTweet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				postTweetActionPerformed(e);
+			}
+		});
+	}
+	
+	private void initFollowUser() {
+		button_followuser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				followUserActionPerformed(e);				
+			}			
+		});
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected void postTweetActionPerformed(ActionEvent e) {
+		user.postTweet(textarea_textmessage.getText());
+		textarea_textmessage.setText("");
+		list_newsfeed.setModel((ListModel<String>) user.getNewsfeeds());
+	}
+	
+	protected void followUserActionPerformed(ActionEvent e) {
+		user.addObserver(new User(textarea_userid.getText()));
+		textarea_userid.setText("");
+	}
 }

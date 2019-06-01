@@ -12,10 +12,12 @@ import calculate.Visitor;
 public class UserGroup implements TwitTree{
 	private String id;
 	private TreeSet<TwitTree> children;
+	private long creationTime;
 		
 	public UserGroup(String groupID){
 		this.id = groupID;
 		children = new TreeSet<TwitTree>();
+		creationTime = System.currentTimeMillis();
 	}
 	
 String getID() {
@@ -71,8 +73,7 @@ public boolean isLeaf() {
 }
 
 @Override
-public Enumeration children() {
-	// TODO Auto-generated method stub
+public Enumeration<?> children() {
 	return null;
 }
 
@@ -84,13 +85,14 @@ public User getUser(String user) {
 
 @Override
 public boolean contains(Visitor user) {
-	// TODO Auto-generated method stub
+	if (user instanceof UserGroup) 
+		return this.toString().equals(user.toString());
+	
 	return false;
 }
 
 @Override
 public long showCreationTime() {
-	// TODO Auto-generated method stub
-	return 0;
+	return creationTime;
 }
 }

@@ -39,7 +39,6 @@ public class MainView extends JFrame{
 	private static MainView mvInstance;
 	
 	private final Sound s = new Sound();
-	private GroupLayout layout1;
 	
 	// frame1 Variables declaration    
 	private JButton button_addUser;
@@ -94,7 +93,7 @@ public class MainView extends JFrame{
         textarea_addUser = new JTextArea();
         textarea_addGroup = new JTextArea();
     
-        GroupLayout GLayout = new GroupLayout(contentPane);	/*////////////////////////// */
+        GroupLayout GLayout = new GroupLayout(contentPane);
         pane1_tree.setViewportView(tree);
         
    
@@ -157,7 +156,7 @@ public class MainView extends JFrame{
         button_lastUpdatedUser = new JButton("Show Last Updated User");
 		button_lastUpdatedUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				lastUpdatedUserActionPerformed(evt);
+				showLastUpdatedUserActionPerformed(evt);
 			}
 		});
         
@@ -169,54 +168,54 @@ public class MainView extends JFrame{
         textarea_addGroup.setRows(5);
         pane3_groupID.setViewportView(textarea_addGroup);
        
-        layout1.setHorizontalGroup(
-            layout1.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout1.createSequentialGroup()
+        GLayout.setHorizontalGroup(
+            GLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pane1_tree, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout1.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(layout1.createSequentialGroup()
-                        .addGroup(layout1.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                .addGroup(GLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(GLayout.createSequentialGroup()
+                        .addGroup(GLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                             .addComponent(button_showUserTotal, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(button_showMsgTotal, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                        .addGroup(layout1.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                        .addGroup(GLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                             .addComponent(button_showPosPercTotal, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
                             .addComponent(button_showGroupTotal, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(button_openUserView, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pane2_userID, GroupLayout.Alignment.TRAILING)
                     .addComponent(pane3_groupID))
                 .addGap(18, 18, 18)
-                .addGroup(layout1.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(GLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(button_addUser, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                     .addComponent(button_addGroup, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addComponent(contentPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        layout1.setVerticalGroup(
-            layout1.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout1.createSequentialGroup()
+        GLayout.setVerticalGroup(
+            GLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout1.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(GLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(contentPane, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout1.createSequentialGroup()
-                        .addGroup(layout1.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addGroup(GLayout.createSequentialGroup()
+                        .addGroup(GLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                             .addComponent(button_addUser, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                             .addComponent(pane3_groupID, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addGroup(layout1.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                        .addGroup(GLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                             .addComponent(button_addGroup, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                             .addComponent(pane2_userID, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(button_openUserView, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                         .addGap(17, 17, 17)
-                        .addGroup(layout1.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                        .addGroup(GLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                             .addComponent(button_showGroupTotal, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                             .addComponent(button_showUserTotal, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(28, 28, 28)
-                        .addGroup(layout1.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addGroup(GLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(button_showMsgTotal, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                             .addComponent(button_showPosPercTotal, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
                     .addComponent(pane1_tree))
@@ -231,7 +230,7 @@ public class MainView extends JFrame{
     	else 	// When User doesn't select anything and click the button.
     		JOptionPane.showMessageDialog(null, "You didn't select User.");
     }  
-    
+   
     private void validateIDsActionPerformed(ActionEvent evt) {
 		ValidateVisitor validVisitor = new ValidateVisitor();
 		root.accept(validVisitor);
@@ -241,22 +240,22 @@ public class MainView extends JFrame{
 			JOptionPane.showMessageDialog(null, "Duplicate IDs or with spaces");
 	}
 
-    private void lastUpdatedUserActionPerformed(ActionEvent evt) {
+    private void showLastUpdatedUserActionPerformed(ActionEvent evt) {
     	long maxTime = 0;
-		Map<User, Long> map = new HashMap<>();
-		for (User u : users) {
-			if (u.getLastUpdateTime() > maxTime) {
-				map.clear();
-				maxTime = u.getLastUpdateTime();
-				map.put(u, u.getLastUpdateTime());
+		Map<User, Long> theMap = new HashMap<>();
+		for (User user : users) {
+			if (user.getLastUpdateTime() > maxTime) {
+				theMap.clear();
+				maxTime = user.getLastUpdateTime();
+				theMap.put(user, user.getLastUpdateTime());
 			}
 		}
 		
-		if (map.isEmpty()) 
+		if (theMap.isEmpty()) 
 			JOptionPane.showMessageDialog(null, "Last update unknown");
 		 else 
 			// get the first User with the latest maxTime value
-			JOptionPane.showMessageDialog(null, map.keySet().stream().findFirst().get());
+			JOptionPane.showMessageDialog(null, theMap.keySet().stream().findFirst().get());
     }
     
     

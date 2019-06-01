@@ -1,9 +1,13 @@
 package main;
 
-import gui.MiniTwitterGUI;
+import view.MainView;
 
 public class Driver {
+	
+	
 	public static void main(String[]args) {
-		MiniTwitterGUI g = new MiniTwitterGUI();
+		MainView.getInstance();
 	}
+
+	
 }
