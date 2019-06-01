@@ -8,6 +8,8 @@ CS380: How the computer networks are created; network performance; OSI model, co
 
 CS431: Overview of Operating Systems; Process/Processor Management, Synchronization, Deadlock, File System, security, privacy and etc.
 
+CS3010: Numerical Method- Error analysis, zeros of a function, systems of linear equations, interpolation, and etc.
+
 CS445: Utilizing OpenGL, Line Algorithms, how to draw circles and ellipses, filling algorithms, 2D and 3D transformation, 2D and 3D viewing and clipping.
 
 CS480: Familiarzation with the interaction with the servers and users, including the resgistering AWS, along with the usage of CSS, Bootstrap, JavaScript, React.js and etc. 

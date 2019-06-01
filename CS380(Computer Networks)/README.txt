@@ -17,6 +17,8 @@ Projects Description
 
 - EX3: Use Checksum for encryption/decrpytion.
 
+- EX5: Report Project- ipconfig, ping, pcap-library, sniffer, TCP packets, 
+
 - P1: ChatClient
 	Similar as EX0 but connecting with actual server; create the socket, setup the socket for connecting, attempt to connect, and use thread(runner) to be keep connected with the server.
 
